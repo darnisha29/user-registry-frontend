@@ -19,7 +19,7 @@ const UserForm: React.FC<UserFormProps> = ({ setUsers }) => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://13.126.46.96:5000/api/user`, user);
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/user`, user);
       console.log(response);
       alert('User submitted successfully!');
 
@@ -41,7 +41,7 @@ const UserForm: React.FC<UserFormProps> = ({ setUsers }) => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get(`http://13.126.46.96:5000/api/users`);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users`);
       setUsers(response.data);
     } catch (error) {
       console.error('Error fetching users:', error);
