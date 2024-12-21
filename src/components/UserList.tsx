@@ -1,9 +1,9 @@
-import React, {  useEffect } from 'react';
-import axios from 'axios';
-import { User } from '@/types/User';
+import React, { useEffect } from "react";
+import axios from "axios";
+import { User } from "@/types/User";
 
 interface UserListProps {
-    users:User[];
+  users: User[];
   setUsers: React.Dispatch<React.SetStateAction<User[]>>;
 }
 
@@ -17,7 +17,7 @@ const UserList: React.FC<UserListProps> = ({users, setUsers }) => {
         const response = await axios.get(apiUrl);
         setUsers(response.data);
       } catch (error) {
-        console.error('Error fetching users:', error);
+        console.error("Error fetching users:", error);
       }
     };
 
@@ -54,7 +54,3 @@ const UserList: React.FC<UserListProps> = ({users, setUsers }) => {
 };
 
 export default UserList;
-
-
-
-
