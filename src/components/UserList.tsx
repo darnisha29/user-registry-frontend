@@ -12,7 +12,7 @@ const UserList: React.FC<UserListProps> = ({users, setUsers }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(`http://13.233.201.16:5000/api/users`);
+        const response = await axios.get(`http://13.126.46.96:5000/api/users`);
         setUsers(response.data);
       } catch (error) {
         console.error('Error fetching users:', error);
