@@ -6,8 +6,8 @@ interface UserFormProps {
 users:User[];
   setUsers: React.Dispatch<React.SetStateAction<User[]>>;
 }
-const apiUrl = process.env.NEXT_API_GET_URL|| 'http://13.202.226.117:5000/api/users';
-const postUrl = process.env.NEXT_API_post_URL || 'http://13.202.226.117:5000/api/user';
+const apiUrl = process.env.NEXT_API_GET_URL|| 'http://13.126.46.96:5000/api/users';
+const postUrl = process.env.NEXT_API_post_URL || 'http://13.126.46.96:5000/api/user';
 const UserForm: React.FC<UserFormProps> = ({ setUsers }) => {
   const [user, setUser] = useState<Omit<User, 'id'>>({
     firstName: '',
