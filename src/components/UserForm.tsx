@@ -6,7 +6,8 @@ interface UserFormProps {
 users:User[];
   setUsers: React.Dispatch<React.SetStateAction<User[]>>;
 }
-const apiUrl = process.env.NEXT_API_URL|| 'http://13.126.46.96:5000/api/users';
+const apiUrl = process.env.NEXT_API_GET_URL|| '/api/users';
+const postUrl = process.env.NEXT_API_post_URL || 'api/user';
 const UserForm: React.FC<UserFormProps> = ({ setUsers }) => {
   const [user, setUser] = useState<Omit<User, 'id'>>({
     firstName: '',
@@ -19,7 +20,7 @@ const UserForm: React.FC<UserFormProps> = ({ setUsers }) => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post(apiUrl, user);
+      const response = await axios.post(postUrl, user);
       console.log(response);
       alert('User submitted successfully!');
 
