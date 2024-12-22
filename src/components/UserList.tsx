@@ -7,7 +7,7 @@ interface UserListProps {
   setUsers: React.Dispatch<React.SetStateAction<User[]>>;
 }
 
-const apiUrl = process.env.NEXT_API_GET_URL || 'http://13.202.226.117:5000/api/users';
+const apiUrl = process.env.NEXT_API_GET_URL || 'http://13.202.226.117:5001/api/users';
 
 const UserList: React.FC<UserListProps> = ({users, setUsers }) => {
 
