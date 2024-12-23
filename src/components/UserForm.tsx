@@ -3,15 +3,16 @@ import axios from 'axios';
 import { User } from '@/types/User';
 
 interface UserFormProps {
-users:User[];
+  users: User[];
   setUsers: React.Dispatch<React.SetStateAction<User[]>>;
 }
-const apiUrl = process.env.NEXT_API_GET_URL!;
-const postUrl = process.env.NEXT_API_post_URL!;
+
+const API_URL = `${process.env.NEXT_PUBLIC_API_URL}`;
+
 const UserForm: React.FC<UserFormProps> = ({ setUsers }) => {
   const [user, setUser] = useState<Omit<User, 'id'>>({
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
     address: '',
     phone: '',
     email: ''
@@ -20,16 +21,13 @@ const UserForm: React.FC<UserFormProps> = ({ setUsers }) => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post(postUrl, user);
+      const response = await axios.post(API_URL, user);
       console.log(response);
       alert('User submitted successfully!');
-
       await fetchUsers();
-      
-     
       setUser({
-        firstName: '',
-        lastName: '',
+        first_name: '',
+        last_name: '',
         address: '',
         phone: '',
         email: ''
@@ -42,7 +40,7 @@ const UserForm: React.FC<UserFormProps> = ({ setUsers }) => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get(apiUrl);
+      const response = await axios.get(API_URL);
       setUsers(response.data);
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -51,6 +49,8 @@ const UserForm: React.FC<UserFormProps> = ({ setUsers }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+
+    // Update the user state dynamically based on the input name
     setUser(prev => ({
       ...prev,
       [name]: value
@@ -60,10 +60,10 @@ const UserForm: React.FC<UserFormProps> = ({ setUsers }) => {
   return (
     <form onSubmit={handleSubmit} className="max-w-xl mx-auto mt-10">
       <div className="mb-4">
-        <input 
+        <input
           type="text"
-          name="firstName"
-          value={user.firstName}
+          name="first_name"
+          value={user.first_name}
           onChange={handleChange}
           placeholder="First Name"
           required
@@ -71,10 +71,10 @@ const UserForm: React.FC<UserFormProps> = ({ setUsers }) => {
         />
       </div>
       <div className="mb-4">
-        <input 
+        <input
           type="text"
-          name="lastName"
-          value={user.lastName}
+          name="last_name"
+          value={user.last_name}
           onChange={handleChange}
           placeholder="Last Name"
           required
@@ -82,7 +82,7 @@ const UserForm: React.FC<UserFormProps> = ({ setUsers }) => {
         />
       </div>
       <div className="mb-4">
-        <input 
+        <input
           type="text"
           name="address"
           value={user.address}
@@ -93,7 +93,7 @@ const UserForm: React.FC<UserFormProps> = ({ setUsers }) => {
         />
       </div>
       <div className="mb-4">
-        <input 
+        <input
           type="tel"
           name="phone"
           value={user.phone}
@@ -104,7 +104,7 @@ const UserForm: React.FC<UserFormProps> = ({ setUsers }) => {
         />
       </div>
       <div className="mb-4">
-        <input 
+        <input
           type="email"
           name="email"
           value={user.email}
@@ -114,8 +114,8 @@ const UserForm: React.FC<UserFormProps> = ({ setUsers }) => {
           className="w-full px-3 py-2 border rounded text-black"
         />
       </div>
-      <button 
-        type="submit" 
+      <button
+        type="submit"
         className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
       >
         Submit User
@@ -125,4 +125,3 @@ const UserForm: React.FC<UserFormProps> = ({ setUsers }) => {
 };
 
 export default UserForm;
-

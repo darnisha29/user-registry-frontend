@@ -7,14 +7,15 @@ interface UserListProps {
   setUsers: React.Dispatch<React.SetStateAction<User[]>>;
 }
 
-const apiUrl = process.env.NEXT_API_GET_URL! ;
+const API_URL = `${process.env.NEXT_PUBLIC_API_URL}`;
 
-const UserList: React.FC<UserListProps> = ({users, setUsers }) => {
+// const apiUrl = process.env.NEXT_API_GET_URL! ;
 
+const UserList: React.FC<UserListProps> = ({ users, setUsers }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(apiUrl);
+        const response = await axios.get(API_URL);
         setUsers(response.data);
       } catch (error) {
         console.error("Error fetching users:", error);
@@ -40,8 +41,8 @@ const UserList: React.FC<UserListProps> = ({users, setUsers }) => {
         <tbody>
           {users.map((user) => (
             <tr key={user.id} className="hover:bg-gray-100">
-              <td className="border p-2">{user.firstName}</td>
-              <td className="border p-2">{user.lastName}</td>
+              <td className="border p-2">{user.first_name}</td>
+              <td className="border p-2">{user.last_name}</td>
               <td className="border p-2">{user.address}</td>
               <td className="border p-2">{user.phone}</td>
               <td className="border p-2">{user.email}</td>
